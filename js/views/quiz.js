@@ -1,5 +1,6 @@
 // ==========================================================================
 // ИНТЕРАКТИВНЫЙ ТРЕНАЖЁР / КВЕСТ (11 550 ЗАДАНИЙ)
+// Соответствие разметке: activity_quiz.xml + item_option.xml (M3 Expressive)
 // ==========================================================================
 
 import { store } from '../store.js';
@@ -15,9 +16,10 @@ export function renderQuiz(container, params = {}) {
 
   if (!tasks || tasks.length === 0) {
     container.innerHTML = `
-      <div class="card" style="text-align: center; padding: 40px;">
-        <h2>⚠️ Задания загружаются...</h2>
-        <p style="color: var(--text-secondary); margin: 12px 0 20px 0;">База вопросов инициализируется, подождите секунду.</p>
+      <div class="card" style="text-align: center; padding: 44px 24px; max-width: 600px; margin: 40px auto;">
+        <div style="font-size: 3rem; margin-bottom: 12px;">⏳</div>
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">База заданий загружается...</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">Инициализация 11 550 вопросов и распаковка архива.</p>
         <button class="btn btn-primary" onclick="window.location.reload()">Обновить страницу</button>
       </div>
     `;
@@ -29,40 +31,51 @@ export function renderQuiz(container, params = {}) {
   let pointsEarned = 0;
   let answered = false;
 
+  const optionLetters = ['A', 'B', 'C', 'D'];
+
   function renderCurrentQuestion() {
     const q = tasks[currentIndex];
     const progress = Math.round(((currentIndex) / tasks.length) * 100);
 
     container.innerHTML = `
       <div class="quiz-runner">
-        <!-- Верхняя плашка -->
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <button class="btn btn-secondary btn-sm" onclick="if(confirm('Прервать квест?')) window.location.hash='#home'">✕ Выйти</button>
-            <span style="font-weight: 700; font-size: 0.95rem;">${subInfo.icon} ${subInfo.name}</span>
+        <!-- Верхняя панель (Назад, Предмет, Вопрос N из M) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="btn btn-secondary btn-sm" onclick="if(confirm('Прервать квест?')) window.location.hash='#home'">
+              ✕ Выйти
+            </button>
+            <span style="font-weight: 800; font-size: 0.98rem; color: var(--text-main);">
+              ${subInfo.icon} ${subInfo.name}
+            </span>
           </div>
-          <div style="font-weight: 800; color: var(--primary);">
+
+          <span class="badge" style="background: var(--secondary-container); color: var(--on-secondary-container); font-size: 0.82rem; padding: 5px 12px;">
             Вопрос ${currentIndex + 1} из ${tasks.length}
-          </div>
+          </span>
         </div>
 
-        <!-- Прогресс бар -->
-        <div class="quiz-progress-bar">
-          <div class="quiz-progress-fill" style="width: ${progress}%;"></div>
+        <!-- M3 Прогресс-бар -->
+        <div class="m3-progress-track" style="margin-bottom: 18px;">
+          <div class="m3-progress-fill" style="width: ${progress}%;"></div>
         </div>
 
         <!-- Карточка вопроса -->
         <div class="quiz-question-card">
-          <div class="quiz-q-num">Тема: ${q.t || 'Общий раздел'} · ${q.e || 'ОГЭ/ЕГЭ'}</div>
-          <div class="quiz-q-text">${q.q}</div>
+          <div class="quiz-q-num">
+            Тема: ${q.t || 'Общий раздел'} · ${q.e || 'ОГЭ/ЕГЭ'}
+          </div>
+          <div class="quiz-q-text">
+            ${q.q}
+          </div>
         </div>
 
-        <!-- Варианты ответов -->
+        <!-- Варианты ответов (1:1 item_option.xml) -->
         <div class="quiz-options" id="quiz-options-box">
           ${q.o.map((opt, idx) => `
             <button class="quiz-option-btn" id="opt-btn-${idx}" onclick="window.selectQuizOption(${idx})">
-              <span class="quiz-option-key">${idx + 1}</span>
-              <span style="flex: 1;">${opt}</span>
+              <span class="quiz-option-badge">${optionLetters[idx] || (idx + 1)}</span>
+              <span style="flex: 1; line-height: 1.4;">${opt}</span>
             </button>
           `).join('')}
         </div>
@@ -71,7 +84,7 @@ export function renderQuiz(container, params = {}) {
         <div id="quiz-explanation" style="display: none;"></div>
 
         <!-- Кнопка Далее -->
-        <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+        <div style="margin-top: 22px; display: flex; justify-content: flex-end;">
           <button id="quiz-next-btn" class="btn btn-primary btn-lg" style="display: none;" onclick="window.nextQuizQuestion()">
             ${currentIndex + 1 === tasks.length ? '🏁 Завершить квест' : 'Следующий вопрос →'}
           </button>
@@ -118,7 +131,8 @@ export function renderQuiz(container, params = {}) {
     if (q.x) {
       explBox.innerHTML = `
         <div class="quiz-explanation-box">
-          <strong>💡 Пояснение решения:</strong><br>${q.x}
+          <strong style="color: var(--accent);">💡 Пояснение решения:</strong><br>
+          <div style="margin-top: 6px; color: var(--text-main);">${q.x}</div>
         </div>
       `;
       explBox.style.display = 'block';
@@ -143,41 +157,39 @@ export function renderQuiz(container, params = {}) {
     const percent = Math.round((correctCount / tasks.length) * 100);
 
     container.innerHTML = `
-      <div class="quiz-runner" style="text-align: center; padding-top: 20px;">
-        <div class="card" style="padding: 36px 24px;">
-          <div style="font-size: 3.5rem; margin-bottom: 12px;">🏆</div>
-          <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px;">Квест успешно завершён!</h2>
-          <p style="color: var(--text-secondary); margin-bottom: 24px;">
-            Отличный результат тренировки по предмету «${subInfo.name}».
+      <div class="quiz-runner" style="text-align: center; padding-top: 10px;">
+        <div class="card" style="padding: 40px 24px;">
+          <div style="font-size: 3.8rem; margin-bottom: 12px;">🏆</div>
+          <h2 style="font-size: 1.85rem; font-weight: 900; letter-spacing: -0.4px; margin-bottom: 6px; color: var(--text-main);">
+            Квест успешно завершён!
+          </h2>
+          <p style="color: var(--text-secondary); margin-bottom: 28px; font-size: 0.95rem;">
+            Отличный результат тренировки по дисциплине «${subInfo.name}».
           </p>
 
-          <div class="grid-3" style="margin-bottom: 24px;">
-            <div style="background: var(--surface-variant); padding: 16px; border-radius: var(--radius-md);">
-              <div style="font-size: 1.6rem; font-weight: 800; color: #10B981;">${correctCount} / ${tasks.length}</div>
-              <div style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Правильных ответов</div>
+          <div class="grid-3" style="margin-bottom: 28px;">
+            <div class="bento-stat-card bento-mint">
+              <div class="bento-stat-num">${correctCount} / ${tasks.length}</div>
+              <div class="bento-stat-label">верных ответов</div>
             </div>
-            <div style="background: var(--surface-variant); padding: 16px; border-radius: var(--radius-md);">
-              <div style="font-size: 1.6rem; font-weight: 800; color: var(--primary);">${percent}%</div>
-              <div style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Точность решений</div>
+
+            <div class="bento-stat-card bento-indigo">
+              <div class="bento-stat-num">${percent}%</div>
+              <div class="bento-stat-label">точность</div>
             </div>
-            <div style="background: var(--surface-variant); padding: 16px; border-radius: var(--radius-md);">
-              <div style="font-size: 1.6rem; font-weight: 800; color: #F59E0B;">+${pointsEarned}</div>
-              <div style="font-size: 0.8rem; color: var(--text-dim); font-weight: 600;">Очков опыта (XP)</div>
+
+            <div class="bento-stat-card bento-amber">
+              <div class="bento-stat-num">+${pointsEarned}</div>
+              <div class="bento-stat-label">начислено XP</div>
             </div>
           </div>
 
-          ${result && result.leveledUp ? `
-            <div style="background: rgba(99, 102, 241, 0.2); border: 1px solid var(--primary); padding: 14px; border-radius: var(--radius-md); margin-bottom: 24px; color: #A5B4FC; font-weight: 700;">
-              🎉 ПОЗДРАВЛЯЕМ! Вы достигли нового УРОВНЯ ${result.newLevel}!
-            </div>
-          ` : ''}
-
           <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-            <button class="btn btn-primary btn-lg" onclick="window.location.hash='#quiz?subject=${subjectId}&count=${count}'">
-              🔄 Решить ещё раз
+            <button class="btn btn-primary btn-lg" onclick="window.location.hash='#home'">
+              🏠 Вернуться на главную
             </button>
-            <button class="btn btn-secondary btn-lg" onclick="window.location.hash='#home'">
-              🏠 На главную
+            <button class="btn btn-secondary btn-lg" onclick="window.location.hash='#quiz?subject=${subjectId}&count=${count}'">
+              🔄 Повторить квест
             </button>
           </div>
         </div>
@@ -185,22 +197,6 @@ export function renderQuiz(container, params = {}) {
     `;
   }
 
-  // Горячие клавиши 1, 2, 3, 4 для клавиатуры на ПК
-  const keyHandler = (e) => {
-    if (['1', '2', '3', '4'].includes(e.key)) {
-      const idx = parseInt(e.key, 10) - 1;
-      window.selectQuizOption(idx);
-    } else if (e.key === 'Enter') {
-      const nextBtn = document.getElementById('quiz-next-btn');
-      if (nextBtn && nextBtn.style.display !== 'none') {
-        window.nextQuizQuestion();
-      }
-    }
-  };
-
-  window.removeEventListener('keydown', window._quizKeyHandler);
-  window._quizKeyHandler = keyHandler;
-  window.addEventListener('keydown', keyHandler);
-
+  // Запуск первого вопроса
   renderCurrentQuestion();
 }

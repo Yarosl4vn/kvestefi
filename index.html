@@ -10,7 +10,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Квестефи">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#0B0F19">
+  <meta name="theme-color" content="#0D1017">
   <meta name="description" content="Образовательная экосистема ReadySquad: квесты, подготовка к ОГЭ/ЕГЭ и межшкольные олимпиады г. Мытищи">
 
   <!-- Иконки и манифест -->
@@ -18,14 +18,23 @@
   <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
 
-  <!-- Стили приложения -->
+  <!-- Стили приложения (Material Design 3 Expressive) -->
   <link rel="stylesheet" href="./css/app.css">
   <link rel="stylesheet" href="./css/components.css">
 </head>
 <body>
 
+<!-- SVG определения геометрических розеток Cookie (M3 Expressive) -->
+<svg style="display:none;" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="cookie-10" d="M 46.00 24.00 L 45.32 25.68 L 43.66 27.11 L 41.92 28.30 L 40.95 29.51 L 41.03 31.05 L 41.74 33.04 L 42.24 35.18 L 41.80 36.93 L 40.26 37.89 L 38.08 38.08 L 35.97 38.02 L 34.47 38.42 L 33.63 39.72 L 33.04 41.74 L 32.18 43.76 L 30.80 44.92 L 28.99 44.80 L 27.11 43.66 L 25.45 42.38 L 24.00 41.82 L 22.55 42.38 L 20.89 43.66 L 19.01 44.80 L 17.20 44.92 L 15.82 43.76 L 14.96 41.74 L 14.37 39.72 L 13.53 38.42 L 12.03 38.02 L 9.92 38.08 L 7.74 37.89 L 6.20 36.93 L 5.76 35.18 L 6.26 33.04 L 6.97 31.05 L 7.05 29.51 L 6.08 28.30 L 4.34 27.11 L 2.68 25.68 L 2.00 24.00 L 2.68 22.32 L 4.34 20.89 L 6.08 19.70 L 7.05 18.49 L 6.97 16.95 L 6.26 14.96 L 5.76 12.82 L 6.20 11.07 L 7.74 10.11 L 9.92 9.92 L 12.03 9.98 L 13.53 9.58 L 14.37 8.28 L 14.96 6.26 L 15.82 4.24 L 17.20 3.08 L 19.01 3.20 L 20.89 4.34 L 22.55 5.62 L 24.00 6.18 L 25.45 5.62 L 27.11 4.34 L 28.99 3.20 L 30.80 3.08 L 32.18 4.24 L 33.04 6.26 L 33.63 8.28 L 34.47 9.58 L 35.97 9.98 L 38.08 9.92 L 40.26 10.11 L 41.80 11.07 L 42.24 12.82 L 41.74 14.96 L 41.03 16.95 L 40.95 18.49 L 41.92 19.70 L 43.66 20.89 L 45.32 22.32 L 46.00 24.00 Z" />
+    <path id="cookie-8" d="M 46.00 24.00 L 45.53 25.69 L 44.30 27.22 L 42.73 28.50 L 41.33 29.63 L 40.46 30.82 L 40.23 32.27 L 40.43 34.07 L 40.63 36.08 L 40.43 38.03 L 39.56 39.56 L 38.03 40.43 L 36.08 40.63 L 34.07 40.43 L 32.27 40.23 L 30.82 40.46 L 29.63 41.33 L 28.50 42.73 L 27.22 44.30 L 25.69 45.53 L 24.00 46.00 L 22.31 45.53 L 20.78 44.30 L 19.50 42.73 L 18.37 41.33 L 17.18 40.46 L 15.73 40.23 L 13.93 40.43 L 11.92 40.63 L 9.97 40.43 L 8.44 39.56 L 7.57 38.03 L 7.37 36.08 L 7.57 34.07 L 7.77 32.27 L 7.54 30.82 L 6.67 29.63 L 5.27 28.50 L 3.70 27.22 L 2.47 25.69 L 2.00 24.00 L 2.47 22.31 L 3.70 20.78 L 5.27 19.50 L 6.67 18.37 L 7.54 17.18 L 7.77 15.73 L 7.57 13.93 L 7.37 11.92 L 7.57 9.97 L 8.44 8.44 L 9.97 7.57 L 11.92 7.37 L 13.93 7.57 L 15.73 7.77 L 17.18 7.54 L 18.37 6.67 L 19.50 5.27 L 20.78 3.70 L 22.31 2.47 L 24.00 2.00 L 25.69 2.47 L 27.22 3.70 L 28.50 5.27 L 29.63 6.67 L 30.82 7.54 L 32.27 7.77 L 34.07 7.57 L 36.08 7.37 L 38.03 7.57 L 39.56 8.44 L 40.43 9.97 L 40.63 11.92 L 40.43 13.93 L 40.23 15.73 L 40.46 17.18 L 41.33 18.37 L 42.73 19.50 L 44.30 20.78 L 45.53 22.31 L 46.00 24.00 Z" />
+    <path id="cookie-9" d="M 46.00 24.00 L 45.43 25.69 L 43.99 27.17 L 42.30 28.39 L 41.05 29.54 L 40.61 30.88 L 40.89 32.61 L 41.39 34.66 L 41.48 36.70 L 40.72 38.28 L 39.12 39.12 L 37.04 39.26 L 34.98 39.11 L 33.34 39.24 L 32.19 40.08 L 31.31 41.66 L 30.35 43.55 L 29.06 45.09 L 27.44 45.70 L 25.67 45.20 L 24.00 43.91 L 22.54 42.50 L 21.21 41.63 L 19.77 41.63 L 18.05 42.32 L 16.07 43.13 L 14.12 43.40 L 12.54 42.71 L 11.58 41.10 L 11.18 39.01 L 10.97 37.03 L 10.44 35.58 L 9.26 34.71 L 7.44 34.15 L 5.41 33.47 L 3.82 32.36 L 3.17 30.77 L 3.58 28.90 L 4.66 27.06 L 5.74 25.44 L 6.18 24.00 L 5.74 22.56 L 4.66 20.94 L 3.58 19.10 L 3.17 17.23 L 3.82 15.64 L 5.41 14.53 L 7.44 13.85 L 9.26 13.29 L 10.44 12.42 L 10.97 10.97 L 11.18 8.99 L 11.58 6.90 L 12.54 5.29 L 14.12 4.60 L 16.07 4.87 L 18.05 5.68 L 19.77 6.37 L 21.21 6.37 L 22.54 5.50 L 24.00 4.09 L 25.67 2.80 L 27.44 2.30 L 29.06 2.91 L 30.35 4.45 L 31.31 6.34 L 32.19 7.92 L 33.34 8.76 L 34.98 8.89 L 37.04 8.74 L 39.12 8.88 L 40.72 9.72 L 41.48 11.30 L 41.39 13.34 L 40.89 15.39 L 40.61 17.12 L 41.05 18.46 L 42.30 19.61 L 43.99 20.83 L 45.43 22.31 L 46.00 24.00 Z" />
+  </defs>
+</svg>
+
 <div id="app-root">
-  <!-- Боковая панель для ПК / Планшета (Desktop Sidebar) -->
+  <!-- Боковая панель для ПК / Планшета (M3 Navigation Drawer / Rail) -->
   <aside class="app-sidebar">
     <div class="brand-box" onclick="window.location.hash='#home'">
       <img src="./assets/icons/icon-192.png" alt="Квестефи" class="brand-icon">
@@ -90,7 +99,7 @@
           <span id="header-streak-val">5</span>
         </div>
 
-        <!-- Мини-профиль -->
+        <!-- Мини-профиль с аватаром -->
         <div class="user-badge-header" onclick="window.location.hash='#profile'" title="Открыть профиль">
           <div class="user-avatar-mini" id="header-user-avatar">🛡️</div>
           <span class="user-name-mini" id="header-user-name">Ярослав</span>
@@ -103,31 +112,31 @@
       <!-- Сюда динамически монтируются виды через роутер -->
     </div>
 
-    <!-- Нижняя навигационная панель для iPhone / смартфонов -->
+    <!-- Нижняя навигационная панель для iPhone / смартфонов (Material 3 Bar) -->
     <nav class="mobile-bottom-nav">
       <a href="#home" class="bottom-tab active">
-        <span class="tab-icon">🏠</span>
-        <span>Главная</span>
+        <div class="tab-indicator"><span class="tab-icon">🏠</span></div>
+        <span class="tab-label">Главная</span>
       </a>
       <a href="#subjects" class="bottom-tab">
-        <span class="tab-icon">📚</span>
-        <span>Предметы</span>
+        <div class="tab-indicator"><span class="tab-icon">📚</span></div>
+        <span class="tab-label">Предметы</span>
       </a>
       <a href="#competitions" class="bottom-tab">
-        <span class="tab-icon">🏛️</span>
-        <span>Турниры</span>
+        <div class="tab-indicator"><span class="tab-icon">🏛️</span></div>
+        <span class="tab-label">Турниры</span>
       </a>
       <a href="#duels" class="bottom-tab">
-        <span class="tab-icon">⚔️</span>
-        <span>Забеги</span>
+        <div class="tab-indicator"><span class="tab-icon">⚔️</span></div>
+        <span class="tab-label">Забеги</span>
       </a>
       <a href="#chat" class="bottom-tab">
-        <span class="tab-icon">💬</span>
-        <span>Чат</span>
+        <div class="tab-indicator"><span class="tab-icon">💬</span></div>
+        <span class="tab-label">Чат</span>
       </a>
       <a href="#profile" class="bottom-tab">
-        <span class="tab-icon">👤</span>
-        <span>Профиль</span>
+        <div class="tab-indicator"><span class="tab-icon">👤</span></div>
+        <span class="tab-label">Профиль</span>
       </a>
     </nav>
   </main>

@@ -1,81 +1,172 @@
 /* ==========================================================================
-   КВЕСТЕФИ v5.1.0 — ДИЗАЙН-СИСТЕМА PWA (iOS) & DESKTOP (PC)
-   Material Design 3 Expressive + Apple iOS Human Interface Guidelines
+   КВЕСТЕФИ v5.1.0 — ДИЗАЙН-СИСТЕМА (PWA & DESKTOP)
+   Google Material Design 3 Expressive + Apple iOS Safe Areas
+   Точные токены и палитра нативного Android приложения (ru.readysquad.kvest)
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700&family=Roboto:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700;800&display=swap');
+
 :root {
-  /* Цветовая палитра: AMOLED Dark по умолчанию */
-  --bg: #0B0F19;
-  --surface: #131B2E;
-  --surface-variant: #1E293B;
-  --surface-hover: #26334D;
-  --card-bg: rgba(19, 27, 46, 0.85);
+  /* ========================================================================
+     ТЕМНАЯ ТЕМА (Material 3 Expressive Night Hierarchy из colors.xml)
+     ======================================================================== */
+  --bg: #0D1017;
+  --bg-alt: #131722;
+  --surface: #171C2A;
+  --surface-container-low: #141926;
+  --surface-container: #1B2131;
+  --surface2: #232A3D;
+  --surface3: #2D364D;
+  --surface-variant: #232A3D;
+  --surface-hover: #2D364D;
   
-  --primary: #6366F1;
-  --primary-glow: rgba(99, 102, 241, 0.35);
-  --primary-hover: #4F46E5;
+  --outline: #94A3B8;
+  --outline-variant: #2A3248;
+  --on-bg: #F1F5F9;
+  --on-bg-variant: #94A3B8;
+
+  /* Primary (Индиго-акцент) */
+  --primary: #818CF8;
+  --primary-dim: #6366F1;
+  --on-primary: #1E1B4B;
   --primary-container: #312E81;
-  --on-primary: #FFFFFF;
-  
-  --accent: #06B6D4;
-  --accent-container: #164E63;
-  --success: #10B981;
-  --success-container: #064E3B;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-  --danger-container: #7F1D1D;
-  
-  --text-main: #F8FAFC;
+  --on-primary-container: #E0E7FF;
+  --primary-glow: rgba(129, 140, 248, 0.35);
+
+  /* Secondary (Фиолетово-серый контейнер капсул) */
+  --secondary: #CBD5E1;
+  --on-secondary: #1E293B;
+  --secondary-container: #3B2D6E;
+  --on-secondary-container: #EDE9FE;
+
+  /* Tertiary & Семантические цвета */
+  --tertiary: #F472B6;
+  --accent: #818CF8;
+  --pink: #F472B6;
+  --success: #34D399;
+  --success-container: #112A27;
+  --on-success-container: #A7F3D0;
+  --danger: #F87171;
+  --danger-container: #2F151B;
+  --warning: #FBBF24;
+  --warning-container: #2B2113;
+  --on-warning-container: #FDE68A;
+
+  /* Элементы тестов и навигации */
+  --option-bg: #1B2131;
+  --option-border: #2E3750;
+  --nav-bar: #131722;
+  --nav-divider: #1E2538;
+  --card-bg: #1B2131;
+  --border: #2E3750;
+  --border-subtle: #202738;
+
+  /* Текст */
+  --text-main: #F1F5F9;
   --text-secondary: #94A3B8;
   --text-dim: #64748B;
-  --border: #222F49;
-  --border-light: rgba(255, 255, 255, 0.08);
-  
-  /* Размеры и отступы */
-  --sidebar-w: 260px;
-  --bottom-nav-h: 68px;
-  --header-h: 64px;
+
+  /* Бенто-блоки (из нативных Android bg_bento_*.xml) */
+  --bento-hero-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 50%, #7C3AED 100%);
+  --bento-indigo-bg: #1A2140;
+  --bento-indigo-text: #A5B4FC;
+  --bento-mint-bg: #112A27;
+  --bento-mint-text: #34D399;
+  --bento-amber-bg: #2B2113;
+  --bento-amber-text: #FBBF24;
+  --bento-rose-bg: #2C1826;
+  --bento-rose-text: #F472B6;
+
+  /* M3 Expressive Скругления (Corner Scale) */
+  --radius-xs: 4px;
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
   --radius-full: 9999px;
-  
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 25px var(--primary-glow);
-  
-  --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: "SF Mono", "Consolas", "Courier New", monospace;
-  
-  /* iOS Safe Areas */
+
+  /* Размеры панелей */
+  --sidebar-w: 270px;
+  --bottom-nav-h: 72px;
+  --header-h: 66px;
+
+  /* Типографика */
+  --font-main: "Plus Jakarta Sans", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", monospace;
+
+  /* Тени и глубина */
+  --elevation-1: 0 2px 8px rgba(0, 0, 0, 0.35);
+  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --elevation-3: 0 16px 40px rgba(0, 0, 0, 0.6);
+
+  /* iOS Safe Area Insets */
   --sat: env(safe-area-inset-top, 0px);
   --sab: env(safe-area-inset-bottom, 0px);
   --sal: env(safe-area-inset-left, 0px);
   --sar: env(safe-area-inset-right, 0px);
 }
 
-/* Светлая тема */
+/* ==========================================================================
+   СВЕТЛАЯ ТЕМА (Material 3 Expressive Light из values/colors.xml)
+   ========================================================================== */
 body.theme-light {
-  --bg: #F8FAFC;
+  --bg: #F6F7FB;
+  --bg-alt: #EEF0F8;
   --surface: #FFFFFF;
-  --surface-variant: #F1F5F9;
-  --surface-hover: #E2E8F0;
-  --card-bg: rgba(255, 255, 255, 0.95);
-  
-  --primary: #4F46E5;
-  --primary-glow: rgba(79, 70, 229, 0.2);
-  --primary-container: #E0E7FF;
+  --surface-container-low: #F9FAFE;
+  --surface-container: #FFFFFF;
+  --surface2: #EEF1F9;
+  --surface3: #E2E7F4;
+  --surface-variant: #EEF1F9;
+  --surface-hover: #E2E7F4;
+
+  --outline: #64748B;
+  --outline-variant: #E2E8F0;
+  --on-bg: #0F172A;
+  --on-bg-variant: #475569;
+
+  --primary: #5B4CE6;
+  --primary-dim: #4338CA;
   --on-primary: #FFFFFF;
-  
+  --primary-container: #E0E7FF;
+  --on-primary-container: #1E1B4B;
+  --primary-glow: rgba(91, 76, 230, 0.25);
+
+  --secondary: #475569;
+  --on-secondary: #FFFFFF;
+  --secondary-container: #EDE9FE;
+  --on-secondary-container: #2E1065;
+
+  --tertiary: #DB2777;
+  --accent: #4F46E5;
+  --pink: #DB2777;
+  --success: #059669;
+  --danger: #DC2626;
+
+  --option-bg: #FFFFFF;
+  --option-border: #CBD5E1;
+  --nav-bar: #FFFFFF;
+  --nav-divider: #E2E8F0;
+  --card-bg: #FFFFFF;
+  --border: #E2E8F0;
+  --border-subtle: #F1F5F9;
+
   --text-main: #0F172A;
   --text-secondary: #475569;
   --text-dim: #94A3B8;
-  --border: #E2E8F0;
-  --border-light: rgba(0, 0, 0, 0.06);
+
+  --bento-indigo-bg: #EEF2FF;
+  --bento-indigo-text: #4338CA;
+  --bento-mint-bg: #ECFDF5;
+  --bento-mint-text: #059669;
+  --bento-amber-bg: #FEF3C7;
+  --bento-amber-text: #D97706;
 }
 
-/* Сброс стилей */
+/* ==========================================================================
+   СБРОС СТИЛЕЙ И БАЗОВЫЙ КАРКАС
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -97,7 +188,7 @@ html, body {
   user-select: none;
 }
 
-/* Основной лейаут приложения */
+/* Основной Flex-каркас всего приложения */
 #app-root {
   display: flex;
   width: 100%;
@@ -105,14 +196,17 @@ html, body {
   height: 100dvh;
   position: relative;
   overflow: hidden;
+  background: var(--bg);
 }
 
-/* Сайдбар на ПК */
+/* ==========================================================================
+   БОКОВАЯ ПАНЕЛЬ ДЛЯ ПК (Material 3 Navigation Drawer / Rail)
+   ========================================================================== */
 .app-sidebar {
   width: var(--sidebar-w);
   height: 100%;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
+  background: var(--nav-bar);
+  border-right: 1px solid var(--nav-divider);
   display: flex;
   flex-direction: column;
   padding: calc(var(--sat) + 16px) 16px 20px 16px;
@@ -129,28 +223,31 @@ html, body {
 }
 
 .brand-icon {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
-  box-shadow: 0 4px 12px var(--primary-glow);
+  box-shadow: 0 4px 14px var(--primary-glow);
+  object-fit: cover;
 }
 
 .brand-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: -0.4px;
-  background: linear-gradient(135deg, #A5B4FC 0%, #6366F1 50%, #38BDF8 100%);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #A5B4FC 0%, #818CF8 50%, #38BDF8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .brand-version {
-  font-size: 0.7rem;
+  display: inline-block;
+  font-size: 0.72rem;
   color: var(--text-dim);
-  font-weight: 600;
-  padding: 1px 6px;
-  background: var(--surface-variant);
+  font-weight: 700;
+  padding: 1px 8px;
+  background: var(--surface2);
   border-radius: var(--radius-full);
+  margin-top: 2px;
 }
 
 .nav-links {
@@ -159,33 +256,41 @@ html, body {
   gap: 6px;
   flex: 1;
   overflow-y: auto;
-  margin-top: 10px;
+  margin-top: 14px;
+  padding-right: 2px;
 }
 
+/* M3 Navigation Drawer Item (Pill style) */
 .nav-link {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 11px 14px;
-  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  border-radius: var(--radius-2xl);
   color: var(--text-secondary);
-  font-size: 0.92rem;
+  font-size: 0.94rem;
   font-weight: 600;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.22s cubic-bezier(0.2, 0, 0, 1);
   cursor: pointer;
+  position: relative;
 }
 
 .nav-link:hover {
-  background: var(--surface-hover);
+  background: var(--surface-container);
   color: var(--text-main);
   transform: translateX(3px);
 }
 
+.nav-link:active {
+  transform: scale(0.98);
+}
+
 .nav-link.active {
-  background: var(--primary);
-  color: var(--on-primary);
-  box-shadow: 0 4px 16px var(--primary-glow);
+  background: var(--primary-container);
+  color: var(--on-primary-container);
+  font-weight: 800;
+  box-shadow: 0 4px 16px rgba(49, 46, 129, 0.45);
 }
 
 .nav-link .icon {
@@ -193,9 +298,12 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 24px;
 }
 
-/* Контентная зона */
+/* ==========================================================================
+   ОСНОВНАЯ РАБОЧАЯ ОБЛАСТЬ И ШАПКА
+   ========================================================================== */
 .app-main {
   flex: 1;
   display: flex;
@@ -203,6 +311,7 @@ html, body {
   height: 100%;
   overflow: hidden;
   position: relative;
+  background: var(--bg);
 }
 
 /* Шапка страницы */
@@ -212,11 +321,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(11, 15, 25, 0.75);
+  background: rgba(13, 16, 23, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--nav-divider);
   z-index: 40;
+}
+
+body.theme-light .app-header {
+  background: rgba(255, 255, 255, 0.88);
 }
 
 .header-left {
@@ -226,9 +339,10 @@ html, body {
 }
 
 .header-title {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
+  color: var(--text-main);
 }
 
 .header-right {
@@ -237,25 +351,27 @@ html, body {
   gap: 12px;
 }
 
+/* Плашка серии / ударного темпа */
 .streak-pill {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  color: #FBBF24;
+  padding: 6px 14px;
+  background: var(--bento-amber-bg);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  color: var(--bento-amber-text);
   border-radius: var(--radius-full);
-  font-weight: 700;
-  font-size: 0.85rem;
+  font-weight: 800;
+  font-size: 0.86rem;
 }
 
+/* Мини-бейдж пользователя в шапке */
 .user-badge-header {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 5px 12px 5px 6px;
-  background: var(--surface-variant);
+  padding: 4px 14px 4px 5px;
+  background: var(--surface-container);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   cursor: pointer;
@@ -263,31 +379,34 @@ html, body {
 }
 
 .user-badge-header:hover {
-  background: var(--surface-hover);
+  background: var(--surface2);
   border-color: var(--primary);
+  transform: translateY(-1px);
 }
 
 .user-avatar-mini {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-full);
   background: var(--primary-container);
+  color: var(--on-primary-container);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 
 .user-name-mini {
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   max-width: 140px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--text-main);
 }
 
-/* Контентный контейнер с прокруткой */
+/* Контейнер прокрутки представлений */
 .view-container {
   flex: 1;
   overflow-y: auto;
@@ -298,15 +417,15 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Нижняя панель для мобильных / iPhone */
+/* ==========================================================================
+   НИЖНЯЯ НАВИГАЦИЯ ДЛЯ IPHONE / СМАРТФОНОВ (Material 3 Navigation Bar)
+   ========================================================================== */
 .mobile-bottom-nav {
   display: none;
   height: calc(var(--bottom-nav-h) + var(--sab));
   padding-bottom: var(--sab);
-  background: rgba(19, 27, 46, 0.94);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-top: 1px solid var(--border);
+  background: var(--nav-bar);
+  border-top: 1px solid var(--nav-divider);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -314,40 +433,68 @@ html, body {
   z-index: 100;
   align-items: center;
   justify-content: space-around;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.4);
 }
 
+/* Вкладка навигации */
 .bottom-tab {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  color: var(--text-dim);
   text-decoration: none;
-  font-size: 0.68rem;
-  font-weight: 600;
   flex: 1;
   height: 100%;
-  transition: all 0.2s ease;
   cursor: pointer;
+  padding-top: 6px;
+  padding-bottom: 4px;
+}
+
+/* Активная капсула-индикатор M3 Expressive Pill */
+.tab-indicator {
+  width: 60px;
+  height: 32px;
+  border-radius: 16px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.24s cubic-bezier(0.2, 0, 0, 1);
 }
 
 .bottom-tab .tab-icon {
-  font-size: 1.35rem;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.2s ease;
 }
 
-.bottom-tab.active {
-  color: #A5B4FC;
+.bottom-tab .tab-label {
+  font-size: 0.70rem;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  color: var(--text-secondary);
+  margin-top: 3px;
+  transition: color 0.2s ease, font-weight 0.2s ease;
+}
+
+/* Состояние активной вкладки */
+.bottom-tab.active .tab-indicator {
+  background: var(--secondary-container);
 }
 
 .bottom-tab.active .tab-icon {
-  transform: scale(1.18);
-  color: var(--primary);
-  filter: drop-shadow(0 2px 8px var(--primary-glow));
+  color: var(--on-secondary-container);
+  transform: scale(1.1);
 }
 
-/* Адаптивность для мобильных экранов (iPhone PWA) */
+.bottom-tab.active .tab-label {
+  color: var(--primary);
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   АДАПТИВНОСТЬ: МОБИЛЬНЫЕ УСТРОЙСТВА & ПК
+   ========================================================================== */
 @media (max-width: 899px) {
   .app-sidebar {
     display: none;
@@ -359,36 +506,39 @@ html, body {
   
   .view-container {
     padding: 16px;
-    padding-bottom: calc(var(--bottom-nav-h) + var(--sab) + 16px);
+    padding-bottom: calc(var(--bottom-nav-h) + var(--sab) + 18px);
   }
   
   .app-header {
     padding-left: 16px;
     padding-right: 16px;
   }
+
+  .level-goal-split {
+    grid-template-columns: 1fr !important;
+  }
 }
 
-/* Адаптивность для больших экранов (ПК / Монитор) */
 @media (min-width: 900px) {
   .view-container {
-    max-width: 1400px;
+    max-width: 1360px;
     margin: 0 auto;
     width: 100%;
   }
 }
 
-/* Кастомные полосы прокрутки */
+/* Плавные полосы прокрутки */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-variant);
+  background: var(--surface2);
   border-radius: var(--radius-full);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--text-dim);
+  background: var(--outline);
 }
