@@ -8,6 +8,10 @@ import { sound } from '../audio.js';
 
 export async function renderChat(container) {
   const me = store.currentUser;
+  if (!me) {
+    window.location.hash = '#auth';
+    return;
+  }
 
   container.innerHTML = `
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">

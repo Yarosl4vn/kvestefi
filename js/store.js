@@ -116,12 +116,6 @@ class AppStore {
       }
     }
 
-    // Если пользователя нет — по умолчанию ставим аккаунт Ярослава
-    if (!this.currentUser) {
-      this.currentUser = { ...PRESET_ACCOUNTS.yaroslav };
-      this.saveUser();
-    }
-
     // 2. Загрузить банк заданий (11 550 заданий)
     await this.loadTasks();
     this.isLoaded = true;
@@ -236,6 +230,7 @@ class AppStore {
   logout() {
     this.currentUser = null;
     this.saveUser();
+    this.setOnboarded(false);
   }
 
   async loadTasks() {

@@ -9,6 +9,10 @@ import { sound } from '../audio.js';
 
 export function renderProfile(container) {
   const user = store.currentUser;
+  if (!user) {
+    window.location.hash = '#auth';
+    return;
+  }
   const level = LEVELING.level(user.score);
   const title = LEVELING.title(level);
   const curScore = LEVELING.startScore(level);

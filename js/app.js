@@ -1,11 +1,14 @@
 // ==========================================================================
 // ГЛАВНЫЙ РОУТЕР И ЯДРО ПРИЛОЖЕНИЯ КВЕСТЕФИ (PWA & DESKTOP)
+// ПОЛНОЕ СООТВЕТСТВИЕ ВСЕМ 12 ЭКРАНАМ И МОДУЛЯМ АНДРОИД-ПРИЛОЖЕНИЯ
 // ==========================================================================
 
 import { store } from './store.js';
 import { sound } from './audio.js';
 import { renderHome } from './views/home.js';
 import { renderSubjects } from './views/subjects.js';
+import { renderLearn } from './views/learn.js';
+import { renderResults } from './views/results.js';
 import { renderQuiz } from './views/quiz.js';
 import { renderCompetitions } from './views/competitions.js';
 import { renderDuels } from './views/duels.js';
@@ -49,8 +52,10 @@ class Application {
     // Маршрутизация по хэшу
     window.addEventListener('hashchange', () => this.handleRouting());
 
-    // Первый запуск (как в Android MainActivity: if (!prefs.onboarded) startActivity(Onboarding))
-    if (!store.isOnboarded() && (!window.location.hash || window.location.hash === '#home')) {
+    // Первый запуск или пользователь не авторизован (как в Android MainActivity: if (!prefs.onboarded))
+    if (!store.currentUser && (!window.location.hash || window.location.hash === '#home')) {
+      window.location.hash = '#auth';
+    } else if (!store.isOnboarded() && (!window.location.hash || window.location.hash === '#home')) {
       window.location.hash = '#onboarding';
     } else {
       this.handleRouting();
@@ -84,6 +89,19 @@ class Application {
     const { route, params } = this.parseHash();
     this.currentRoute = route;
 
+    // Защита роутов: если пользователь не вошел, разрешены только #auth и #onboarding
+    if (!store.currentUser && route !== 'auth' && route !== 'onboarding') {
+      window.location.hash = '#auth';
+      return;
+    }
+
+    // Полноэкранный режим начального экрана и экрана авторизации (1:1 Android Activity)
+    if (route === 'auth' || route === 'onboarding') {
+      document.body.classList.add('auth-layout');
+    } else {
+      document.body.classList.remove('auth-layout');
+    }
+
     const container = document.getElementById('view-content');
     if (!container) return;
 
@@ -108,8 +126,16 @@ class Application {
         renderHome(container);
         break;
       case 'subjects':
-        document.title = 'Квестефи — Предметы и теория';
+        document.title = 'Квестефи — Предметы';
         renderSubjects(container);
+        break;
+      case 'learn':
+        document.title = 'Квестефи — Учебник и шпаргалки';
+        renderLearn(container);
+        break;
+      case 'results':
+        document.title = 'Квестефи — Результаты и аналитика';
+        renderResults(container);
         break;
       case 'quiz':
         document.title = 'Квестефи — Квест';
@@ -132,7 +158,7 @@ class Application {
         renderSupport(container);
         break;
       case 'profile':
-        document.title = 'Квестефи — Профиль Ready ID';
+        document.title = 'Квестефи — Профиль и Достижения';
         renderProfile(container);
         break;
       case 'developer':
@@ -182,6 +208,8 @@ class Application {
         auth: 'Вход в систему',
         home: 'Квестефи',
         subjects: 'Школьные дисциплины',
+        learn: 'Учебник и шпаргалки',
+        results: 'Результаты и аналитика',
         quiz: 'Интеллектуальный квест',
         competitions: 'Межшкольные турниры',
         duels: 'Дружеские забеги',
@@ -196,6 +224,9 @@ class Application {
 
     // Обновить данные пользователя в шапке
     const user = store.currentUser;
+    const userBadgeEl = document.querySelector('.user-badge-header');
+    const authBtnEl = document.getElementById('header-auth-btn');
+
     if (user) {
       const streakEl = document.getElementById('header-streak-val');
       if (streakEl) streakEl.innerText = user.streak || 1;
@@ -205,6 +236,18 @@ class Application {
 
       const avatarEl = document.getElementById('header-user-avatar');
       if (avatarEl) avatarEl.innerText = user.avatar || '🛡️';
+
+      if (userBadgeEl) userBadgeEl.style.display = 'inline-flex';
+      if (authBtnEl) {
+        authBtnEl.innerText = '🔄 Сменить';
+        authBtnEl.title = 'Сменить аккаунт / Выйти';
+      }
+    } else {
+      if (userBadgeEl) userBadgeEl.style.display = 'none';
+      if (authBtnEl) {
+        authBtnEl.innerText = '🔑 Вход';
+        authBtnEl.title = 'Войти в аккаунт';
+      }
     }
   }
 }

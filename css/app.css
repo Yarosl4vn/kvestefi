@@ -542,3 +542,37 @@ body.theme-light .app-header {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--outline);
 }
+
+/* ==========================================================================
+   ПОЛНОЭКРАННЫЙ РЕЖИМ НАЧАЛЬНОГО ЭКРАНА И АВТОРИЗАЦИИ (1:1 Android Activity)
+   ========================================================================== */
+body.auth-layout #app-root .app-sidebar,
+body.auth-layout #app-root .app-header,
+body.auth-layout #app-root .mobile-bottom-nav {
+  display: none !important;
+}
+
+body.auth-layout #app-root {
+  display: block !important;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+body.auth-layout .app-main {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.auth-layout .view-container {
+  width: 100% !important;
+  max-width: 680px !important;
+  margin: 0 auto !important;
+  padding: 24px 16px 40px !important;
+}
+

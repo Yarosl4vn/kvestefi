@@ -15,6 +15,10 @@ export function renderDuels(container) {
   let timeLeft = 20;
 
   const user = store.currentUser;
+  if (!user) {
+    window.location.hash = '#auth';
+    return;
+  }
 
   container.innerHTML = `
     <div id="duel-setup-screen">

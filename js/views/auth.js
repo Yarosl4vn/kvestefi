@@ -12,7 +12,7 @@ export function renderAuth(container) {
 
   function render() {
     container.innerHTML = `
-      <div style="max-width: 580px; margin: 0 auto; padding-top: 10px;">
+      <div style="max-width: 600px; margin: 0 auto; padding-top: 10px;">
         <!-- Фирменная шапка Auth (1:1 AuthActivity.kt) -->
         <div class="hero-cta-card" style="margin-bottom: 20px; cursor: default;">
           <svg class="hero-bg-cookie" viewBox="0 0 48 48">
@@ -65,6 +65,85 @@ export function renderAuth(container) {
           </a>
         </div>
       </div>
+
+      <!-- Модальное окно Ready ID SSO (1:1 AuthActivity.kt showReadyIdLoginDialog) -->
+      <div id="readyid-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box" style="max-width: 540px;">
+          <div class="modal-header">
+            <h3 class="modal-title">👑 Единый вход Ready ID</h3>
+            <button class="modal-close" onclick="window.closeModals()">✕</button>
+          </div>
+          <div class="modal-body">
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 16px;">
+              Ready ID — единый безопасный цифровой пропуск экосистемы ReadySquad:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.signInByReadyId('RDY-DEV-001')">
+                👑 <strong>Ярослав Акинфиев</strong> (RDY-DEV-001)
+              </button>
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.signInByReadyId('RDY-DEV-002')">
+                ⚡ <strong>Хайдароли Довлатов</strong> (RDY-DEV-002)
+              </button>
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.signInByReadyId('RDY-DEV-777')">
+                🏫 <strong>Администратор платформы</strong> (RDY-DEV-777)
+              </button>
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.promptManualReadyId()">
+                🔑 Ввести свой Ready ID вручную
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="window.closeModals()">Закрыть</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модальное окно Google Sign-In (1:1 AuthActivity.kt openGoogleLogin) -->
+      <div id="google-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box" style="max-width: 540px;">
+          <div class="modal-header">
+            <h3 class="modal-title">🌐 Вход через Google</h3>
+            <button class="modal-close" onclick="window.closeModals()">✕</button>
+          </div>
+          <div class="modal-body">
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 16px;">
+              Выберите Google аккаунт для быстрой авторизации в Квестефи:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.handleGoogleAccountSelected('akinfeev.ready@gmail.com')">
+                👤 <strong>Ярослав Акинфиев</strong> (akinfeev.ready@gmail.com)
+              </button>
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.handleGoogleAccountSelected('dovlatov.ready@gmail.com')">
+                👤 <strong>Хайдароли Довлатов</strong> (dovlatov.ready@gmail.com)
+              </button>
+              <button class="btn btn-secondary btn-sm" style="text-align: left; justify-content: flex-start; padding: 12px 16px;" onclick="window.handleGoogleAccountSelected('admin.mytishchi@readysquad.ru')">
+                🏫 <strong>Администратор Мытищи</strong> (admin.mytishchi@readysquad.ru)
+              </button>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" onclick="window.closeModals()">Закрыть</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Модальное окно Забыл пароль -->
+      <div id="forgot-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box" style="max-width: 500px;">
+          <div class="modal-header">
+            <h3 class="modal-title">Восстановление доступа</h3>
+            <button class="modal-close" onclick="window.closeModals()">✕</button>
+          </div>
+          <div class="modal-body">
+            <p style="color: var(--text-main); line-height: 1.6; font-size: 0.95rem;">
+              Если забыл пароль, обратись к классному руководителю или куратору олимпиад в своей школе, либо войди через Google или создай новый учебный профиль во вкладке «Регистрация».
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-primary" onclick="window.closeModals()">Понятно</button>
+          </div>
+        </div>
+      </div>
     `;
   }
 
@@ -73,19 +152,31 @@ export function renderAuth(container) {
       return `
         <div>
           <h3 style="font-size: 1.35rem; font-weight: 900; margin-bottom: 6px; color: var(--text-main);">
-            Быстрый гостевой вход
+            Быстрый старт
           </h3>
           <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
-            Начните решать квесты и олимпиады без пароля. Прогресс сохранится на этом устройстве.
+            Можно заниматься без регистрации: квесты, шпаргалки и статистика работают сразу, а к школе легко подключиться позже.
           </p>
 
           <div class="form-group">
-            <label class="form-label">Ваше имя:</label>
-            <input type="text" id="guest-name" class="input" value="Гость" placeholder="Как вас зовут?">
+            <label class="form-label">Как к тебе обращаться?</label>
+            <input type="text" id="guest-name" class="input" value="Гость" placeholder="Введите имя...">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">К какому экзамену готовимся?</label>
+            <div style="display: flex; gap: 10px;">
+              <button type="button" id="btn-exam-oge" class="btn btn-primary btn-sm" style="flex: 1;" onclick="window.setGuestExam('ОГЭ')">
+                ОГЭ (9 класс)
+              </button>
+              <button type="button" id="btn-exam-ege" class="btn btn-secondary btn-sm" style="flex: 1;" onclick="window.setGuestExam('ЕГЭ')">
+                ЕГЭ (10–11 класс)
+              </button>
+            </div>
           </div>
 
           <button class="btn btn-primary btn-lg btn-block" style="margin-top: 14px;" onclick="window.submitGuestAuth()">
-            🚀 Начать как гость
+            Продолжить как гость →
           </button>
         </div>
       `;
@@ -95,10 +186,10 @@ export function renderAuth(container) {
       return `
         <div>
           <h3 style="font-size: 1.35rem; font-weight: 900; margin-bottom: 6px; color: var(--text-main);">
-            Вход в единую систему Ready ID
+            Вход в аккаунт
           </h3>
           <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
-            Введите логин или номер цифрового пропуска Ready ID для синхронизации прогресса.
+            Используй логин и пароль, созданные при регистрации или выданные в школе.
           </p>
 
           <form onsubmit="event.preventDefault(); window.submitLogin();">
@@ -113,13 +204,29 @@ export function renderAuth(container) {
             </div>
 
             <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 16px;">
-              🔑 Войти в систему
+              Войти
             </button>
+
+            <!-- Кнопки входа через Google и Ready ID (1:1 AuthActivity.kt) -->
+            <div style="display: flex; gap: 10px; margin-top: 12px;">
+              <button type="button" class="btn btn-secondary btn-block" onclick="window.showGoogleModal()" style="font-size: 0.86rem; padding: 10px 12px;">
+                🌐 Войти через Google
+              </button>
+              <button type="button" class="btn btn-secondary btn-block" onclick="window.showReadyIdModal()" style="font-size: 0.86rem; padding: 10px 12px;">
+                👑 Войти через Ready ID
+              </button>
+            </div>
+
+            <div style="text-align: center; margin-top: 12px;">
+              <button type="button" class="btn btn-secondary btn-sm" style="border: none; color: var(--text-dim);" onclick="window.showForgotPassModal()">
+                Забыл пароль?
+              </button>
+            </div>
           </form>
 
-          <!-- Быстрый вход для тестирования -->
-          <div style="margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--border);">
-            <div style="font-weight: 800; font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px;">
+          <!-- Быстрый вход для тестирования ролей -->
+          <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border);">
+            <div style="font-weight: 800; font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
               Быстрый вход под готовыми ролями (1 клик):
             </div>
 
@@ -146,7 +253,7 @@ export function renderAuth(container) {
       return `
         <div>
           <h3 style="font-size: 1.35rem; font-weight: 900; margin-bottom: 6px; color: var(--text-main);">
-            Регистрация нового участника
+            Профиль и роль
           </h3>
           <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 20px;">
             Создайте профиль ученика или учителя для участия в олимпиадах г. Мытищи.
@@ -154,8 +261,17 @@ export function renderAuth(container) {
 
           <form onsubmit="event.preventDefault(); window.submitRegister();">
             <div class="form-group">
-              <label class="form-label">Фамилия и Имя:</label>
-              <input type="text" id="reg-name" class="input" placeholder="Например, Иван Иванов" required>
+              <label class="form-label">Роль в системе:</label>
+              <select id="reg-role" class="input" onchange="window.toggleRoleFields(this.value)">
+                <option value="student">🎓 Ученик</option>
+                <option value="teacher">📚 Учитель-предметник / Классный руководитель</option>
+                <option value="school_admin">🏛️ Администрация школы / Куратор</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ФИО (или имя и фамилия):</label>
+              <input type="text" id="reg-name" class="input" placeholder="2–3 слова (например, Иван Иванов)" required>
             </div>
 
             <div class="form-group">
@@ -166,15 +282,6 @@ export function renderAuth(container) {
             <div class="form-group">
               <label class="form-label">Пароль:</label>
               <input type="password" id="reg-pass" class="input" placeholder="Придумайте пароль" required>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Роль в системе:</label>
-              <select id="reg-role" class="input" onchange="window.toggleRoleFields(this.value)">
-                <option value="student">🎓 Ученик</option>
-                <option value="teacher">📚 Учитель-предметник / Классный руководитель</option>
-                <option value="school_admin">🏛️ Администрация школы / Куратор</option>
-              </select>
             </div>
 
             <div class="form-group">
@@ -218,7 +325,7 @@ export function renderAuth(container) {
             </div>
 
             <button type="submit" class="btn btn-primary btn-lg btn-block" style="margin-top: 14px;">
-              ✨ Создать аккаунт и войти
+              Создать аккаунт
             </button>
           </form>
         </div>
@@ -226,11 +333,24 @@ export function renderAuth(container) {
     }
   }
 
-  // Обработчики
+  // Методы действий
   window.setAuthMode = (m) => {
     sound.click();
     mode = m;
     render();
+  };
+
+  window.setGuestExam = (ex) => {
+    sound.click();
+    const btnOge = document.getElementById('btn-exam-oge');
+    const btnEge = document.getElementById('btn-exam-ege');
+    if (ex === 'ОГЭ') {
+      btnOge.className = 'btn btn-primary btn-sm';
+      btnEge.className = 'btn btn-secondary btn-sm';
+    } else {
+      btnOge.className = 'btn btn-secondary btn-sm';
+      btnEge.className = 'btn btn-primary btn-sm';
+    }
   };
 
   window.quickLogin = (key) => {
@@ -238,6 +358,58 @@ export function renderAuth(container) {
     store.loginAs(key);
     sound.fanfare();
     window.location.hash = '#home';
+  };
+
+  window.showGoogleModal = () => {
+    sound.click();
+    const m = document.getElementById('google-modal');
+    if (m) m.style.display = 'flex';
+  };
+
+  window.showReadyIdModal = () => {
+    sound.click();
+    const m = document.getElementById('readyid-modal');
+    if (m) m.style.display = 'flex';
+  };
+
+  window.showForgotPassModal = () => {
+    sound.click();
+    const m = document.getElementById('forgot-modal');
+    if (m) m.style.display = 'flex';
+  };
+
+  window.closeModals = () => {
+    ['readyid-modal', 'google-modal', 'forgot-modal'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  };
+
+  window.signInByReadyId = (readyId) => {
+    sound.click();
+    window.closeModals();
+    if (readyId === 'RDY-DEV-001') store.loginAs('yaroslav');
+    else if (readyId === 'RDY-DEV-002') store.loginAs('khaidaroli');
+    else store.loginAs('school29_admin');
+    sound.fanfare();
+    window.location.hash = '#home';
+  };
+
+  window.handleGoogleAccountSelected = (email) => {
+    sound.click();
+    window.closeModals();
+    if (email.includes('akinfeev')) store.loginAs('yaroslav');
+    else if (email.includes('dovlatov')) store.loginAs('khaidaroli');
+    else store.loginAs('school29_admin');
+    sound.fanfare();
+    window.location.hash = '#home';
+  };
+
+  window.promptManualReadyId = () => {
+    const rid = prompt('Введите ваш номер Ready ID (например, RDY-DEV-001):');
+    if (rid) {
+      window.signInByReadyId(rid.trim().toUpperCase());
+    }
   };
 
   window.submitGuestAuth = () => {
@@ -266,7 +438,7 @@ export function renderAuth(container) {
       return;
     }
 
-    const res = store.login(loginVal, passEl ? passEl.value : '');
+    store.login(loginVal, passEl ? passEl.value : '');
     sound.fanfare();
     window.location.hash = '#home';
   };

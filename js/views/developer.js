@@ -8,6 +8,10 @@ import { sound } from '../audio.js';
 
 export function renderDeveloper(container) {
   const me = store.currentUser;
+  if (!me) {
+    window.location.hash = '#auth';
+    return;
+  }
 
   if (me.role !== 'developer') {
     container.innerHTML = `

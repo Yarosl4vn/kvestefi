@@ -53,9 +53,21 @@
         <span class="icon">📚</span>
         <span>Предметы</span>
       </a>
+      <a href="#learn" class="nav-link">
+        <span class="icon">📖</span>
+        <span>Учеба и шпаргалки</span>
+      </a>
+      <a href="#results" class="nav-link">
+        <span class="icon">📈</span>
+        <span>Результаты</span>
+      </a>
+      <a href="#profile" class="nav-link">
+        <span class="icon">👤</span>
+        <span>Профиль Ready ID</span>
+      </a>
       <a href="#competitions" class="nav-link">
         <span class="icon">🏛️</span>
-        <span>Соревнования</span>
+        <span>Турниры Мытищ</span>
       </a>
       <a href="#duels" class="nav-link">
         <span class="icon">⚔️</span>
@@ -69,17 +81,13 @@
         <span class="icon">🛡️</span>
         <span>Поддержка</span>
       </a>
-      <a href="#profile" class="nav-link">
-        <span class="icon">👤</span>
-        <span>Профиль</span>
-      </a>
       <a href="#developer" class="nav-link">
         <span class="icon">🛠️</span>
         <span>Разработчик</span>
       </a>
       <a href="#settings" class="nav-link">
         <span class="icon">⚙️</span>
-        <span>Настройки</span>
+        <span>Настройки и PWA</span>
       </a>
       <a href="#onboarding" class="nav-link">
         <span class="icon">✨</span>
@@ -114,7 +122,7 @@
         </div>
 
         <!-- Кнопка Вход / Сменить аккаунт -->
-        <button class="btn btn-secondary btn-sm" onclick="window.location.hash='#auth'" title="Вход / Сменить аккаунт" style="padding: 6px 12px; font-size: 0.82rem; border-radius: var(--radius-full);">
+        <button id="header-auth-btn" class="btn btn-secondary btn-sm" onclick="window.location.hash='#auth'" title="Вход / Сменить аккаунт" style="padding: 6px 14px; font-size: 0.82rem; border-radius: var(--radius-full); font-weight: 700;">
           🔑 Вход
         </button>
       </div>
@@ -125,7 +133,7 @@
       <!-- Сюда динамически монтируются виды через роутер -->
     </div>
 
-    <!-- Нижняя навигационная панель для iPhone / смартфонов (Material 3 Bar) -->
+    <!-- Нижняя навигационная панель для iPhone / смартфонов (1:1 Android BottomNavigationView) -->
     <nav class="mobile-bottom-nav">
       <a href="#home" class="bottom-tab active">
         <div class="tab-indicator"><span class="tab-icon">🏠</span></div>
@@ -135,17 +143,13 @@
         <div class="tab-indicator"><span class="tab-icon">📚</span></div>
         <span class="tab-label">Предметы</span>
       </a>
-      <a href="#competitions" class="bottom-tab">
-        <div class="tab-indicator"><span class="tab-icon">🏛️</span></div>
-        <span class="tab-label">Турниры</span>
+      <a href="#learn" class="bottom-tab">
+        <div class="tab-indicator"><span class="tab-icon">📖</span></div>
+        <span class="tab-label">Учеба</span>
       </a>
-      <a href="#duels" class="bottom-tab">
-        <div class="tab-indicator"><span class="tab-icon">⚔️</span></div>
-        <span class="tab-label">Забеги</span>
-      </a>
-      <a href="#chat" class="bottom-tab">
-        <div class="tab-indicator"><span class="tab-icon">💬</span></div>
-        <span class="tab-label">Чат</span>
+      <a href="#results" class="bottom-tab">
+        <div class="tab-indicator"><span class="tab-icon">📈</span></div>
+        <span class="tab-label">Результаты</span>
       </a>
       <a href="#profile" class="bottom-tab">
         <div class="tab-indicator"><span class="tab-icon">👤</span></div>
