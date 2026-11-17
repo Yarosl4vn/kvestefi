@@ -1,0 +1,394 @@
+/* ==========================================================================
+   КВЕСТЕФИ v5.1.0 — ДИЗАЙН-СИСТЕМА PWA (iOS) & DESKTOP (PC)
+   Material Design 3 Expressive + Apple iOS Human Interface Guidelines
+   ========================================================================== */
+
+:root {
+  /* Цветовая палитра: AMOLED Dark по умолчанию */
+  --bg: #0B0F19;
+  --surface: #131B2E;
+  --surface-variant: #1E293B;
+  --surface-hover: #26334D;
+  --card-bg: rgba(19, 27, 46, 0.85);
+  
+  --primary: #6366F1;
+  --primary-glow: rgba(99, 102, 241, 0.35);
+  --primary-hover: #4F46E5;
+  --primary-container: #312E81;
+  --on-primary: #FFFFFF;
+  
+  --accent: #06B6D4;
+  --accent-container: #164E63;
+  --success: #10B981;
+  --success-container: #064E3B;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+  --danger-container: #7F1D1D;
+  
+  --text-main: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-dim: #64748B;
+  --border: #222F49;
+  --border-light: rgba(255, 255, 255, 0.08);
+  
+  /* Размеры и отступы */
+  --sidebar-w: 260px;
+  --bottom-nav-h: 68px;
+  --header-h: 64px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 25px var(--primary-glow);
+  
+  --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "SF Mono", "Consolas", "Courier New", monospace;
+  
+  /* iOS Safe Areas */
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+}
+
+/* Светлая тема */
+body.theme-light {
+  --bg: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-variant: #F1F5F9;
+  --surface-hover: #E2E8F0;
+  --card-bg: rgba(255, 255, 255, 0.95);
+  
+  --primary: #4F46E5;
+  --primary-glow: rgba(79, 70, 229, 0.2);
+  --primary-container: #E0E7FF;
+  --on-primary: #FFFFFF;
+  
+  --text-main: #0F172A;
+  --text-secondary: #475569;
+  --text-dim: #94A3B8;
+  --border: #E2E8F0;
+  --border-light: rgba(0, 0, 0, 0.06);
+}
+
+/* Сброс стилей */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg);
+  color: var(--text-main);
+  font-family: var(--font-main);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+/* Основной лейаут приложения */
+#app-root {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Сайдбар на ПК */
+.app-sidebar {
+  width: var(--sidebar-w);
+  height: 100%;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--sat) + 16px) 16px 20px 16px;
+  z-index: 50;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px 20px 12px;
+  cursor: pointer;
+}
+
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  background: linear-gradient(135deg, #A5B4FC 0%, #6366F1 50%, #38BDF8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.brand-version {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  padding: 1px 6px;
+  background: var(--surface-variant);
+  border-radius: var(--radius-full);
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 11px 14px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  background: var(--surface-hover);
+  color: var(--text-main);
+  transform: translateX(3px);
+}
+
+.nav-link.active {
+  background: var(--primary);
+  color: var(--on-primary);
+  box-shadow: 0 4px 16px var(--primary-glow);
+}
+
+.nav-link .icon {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Контентная зона */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Шапка страницы */
+.app-header {
+  height: var(--header-h);
+  padding: var(--sat) 24px 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(11, 15, 25, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  z-index: 40;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.streak-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #FBBF24;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.user-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 12px 5px 6px;
+  background: var(--surface-variant);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.user-badge-header:hover {
+  background: var(--surface-hover);
+  border-color: var(--primary);
+}
+
+.user-avatar-mini {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-full);
+  background: var(--primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.user-name-mini {
+  font-weight: 700;
+  font-size: 0.85rem;
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Контентный контейнер с прокруткой */
+.view-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 24px;
+  position: relative;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Нижняя панель для мобильных / iPhone */
+.mobile-bottom-nav {
+  display: none;
+  height: calc(var(--bottom-nav-h) + var(--sab));
+  padding-bottom: var(--sab);
+  background: rgba(19, 27, 46, 0.94);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border-top: 1px solid var(--border);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bottom-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.68rem;
+  font-weight: 600;
+  flex: 1;
+  height: 100%;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.bottom-tab .tab-icon {
+  font-size: 1.35rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bottom-tab.active {
+  color: #A5B4FC;
+}
+
+.bottom-tab.active .tab-icon {
+  transform: scale(1.18);
+  color: var(--primary);
+  filter: drop-shadow(0 2px 8px var(--primary-glow));
+}
+
+/* Адаптивность для мобильных экранов (iPhone PWA) */
+@media (max-width: 899px) {
+  .app-sidebar {
+    display: none;
+  }
+  
+  .mobile-bottom-nav {
+    display: flex;
+  }
+  
+  .view-container {
+    padding: 16px;
+    padding-bottom: calc(var(--bottom-nav-h) + var(--sab) + 16px);
+  }
+  
+  .app-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Адаптивность для больших экранов (ПК / Монитор) */
+@media (min-width: 900px) {
+  .view-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* Кастомные полосы прокрутки */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-variant);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
+}

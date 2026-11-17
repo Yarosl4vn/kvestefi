@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Квестефи: Олимпиады и Квесты</title>
+
+  <!-- PWA & Apple iOS специфичные мета-теги -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Квестефи">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0B0F19">
+  <meta name="description" content="Образовательная экосистема ReadySquad: квесты, подготовка к ОГЭ/ЕГЭ и межшкольные олимпиады г. Мытищи">
+
+  <!-- Иконки и манифест -->
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="./assets/icons/favicon.png">
+
+  <!-- Стили приложения -->
+  <link rel="stylesheet" href="./css/app.css">
+  <link rel="stylesheet" href="./css/components.css">
+</head>
+<body>
+
+<div id="app-root">
+  <!-- Боковая панель для ПК / Планшета (Desktop Sidebar) -->
+  <aside class="app-sidebar">
+    <div class="brand-box" onclick="window.location.hash='#home'">
+      <img src="./assets/icons/icon-192.png" alt="Квестефи" class="brand-icon">
+      <div>
+        <div class="brand-title">КВЕСТЕФИ</div>
+        <span class="brand-version">v5.1.0 PWA</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#home" class="nav-link active">
+        <span class="icon">🏠</span>
+        <span>Главная</span>
+      </a>
+      <a href="#subjects" class="nav-link">
+        <span class="icon">📚</span>
+        <span>Предметы</span>
+      </a>
+      <a href="#competitions" class="nav-link">
+        <span class="icon">🏛️</span>
+        <span>Соревнования</span>
+      </a>
+      <a href="#duels" class="nav-link">
+        <span class="icon">⚔️</span>
+        <span>Дружеские забеги</span>
+      </a>
+      <a href="#chat" class="nav-link">
+        <span class="icon">💬</span>
+        <span>Сообщения</span>
+      </a>
+      <a href="#support" class="nav-link">
+        <span class="icon">🛡️</span>
+        <span>Поддержка</span>
+      </a>
+      <a href="#profile" class="nav-link">
+        <span class="icon">👤</span>
+        <span>Профиль</span>
+      </a>
+      <a href="#developer" class="nav-link">
+        <span class="icon">🛠️</span>
+        <span>Разработчик</span>
+      </a>
+      <a href="#settings" class="nav-link">
+        <span class="icon">⚙️</span>
+        <span>Настройки</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Основная рабочая область -->
+  <main class="app-main">
+    <!-- Шапка страницы -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="header-title" id="header-page-title">Квестефи</h1>
+      </div>
+
+      <div class="header-right">
+        <!-- Ударный темп (Streak) -->
+        <div class="streak-pill" title="Серия дней непрерывных занятий">
+          <span>🔥</span>
+          <span id="header-streak-val">5</span>
+        </div>
+
+        <!-- Мини-профиль -->
+        <div class="user-badge-header" onclick="window.location.hash='#profile'" title="Открыть профиль">
+          <div class="user-avatar-mini" id="header-user-avatar">🛡️</div>
+          <span class="user-name-mini" id="header-user-name">Ярослав</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Контейнер представлений (View Container) -->
+    <div class="view-container" id="view-content">
+      <!-- Сюда динамически монтируются виды через роутер -->
+    </div>
+
+    <!-- Нижняя навигационная панель для iPhone / смартфонов -->
+    <nav class="mobile-bottom-nav">
+      <a href="#home" class="bottom-tab active">
+        <span class="tab-icon">🏠</span>
+        <span>Главная</span>
+      </a>
+      <a href="#subjects" class="bottom-tab">
+        <span class="tab-icon">📚</span>
+        <span>Предметы</span>
+      </a>
+      <a href="#competitions" class="bottom-tab">
+        <span class="tab-icon">🏛️</span>
+        <span>Турниры</span>
+      </a>
+      <a href="#duels" class="bottom-tab">
+        <span class="tab-icon">⚔️</span>
+        <span>Забеги</span>
+      </a>
+      <a href="#chat" class="bottom-tab">
+        <span class="tab-icon">💬</span>
+        <span>Чат</span>
+      </a>
+      <a href="#profile" class="bottom-tab">
+        <span class="tab-icon">👤</span>
+        <span>Профиль</span>
+      </a>
+    </nav>
+  </main>
+</div>
+
+<!-- Модульный загрузчик приложения -->
+<script type="module" src="./js/app.js"></script>
+
+</body>
+</html>

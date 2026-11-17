@@ -1,0 +1,45 @@
+{
+  "name": "Квестефи: Олимпиады и Квесты",
+  "short_name": "Квестефи",
+  "description": "Образовательная экосистема ReadySquad: квесты, подготовка к ОГЭ/ЕГЭ и межшкольные турниры г. Мытищи",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B0F19",
+  "theme_color": "#6366F1",
+  "lang": "ru",
+  "dir": "ltr",
+  "categories": ["education", "games"],
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Квест дня",
+      "url": "./index.html#quiz",
+      "description": "Решить ежедневный квест"
+    },
+    {
+      "name": "Соревнования",
+      "url": "./index.html#competitions",
+      "description": "Межшкольные турниры г. Мытищи"
+    },
+    {
+      "name": "Дружеские забеги",
+      "url": "./index.html#duels",
+      "description": "Дуэль 1 на 1"
+    }
+  ]
+}
