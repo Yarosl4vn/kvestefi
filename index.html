@@ -81,6 +81,14 @@
         <span class="icon">⚙️</span>
         <span>Настройки</span>
       </a>
+      <a href="#onboarding" class="nav-link">
+        <span class="icon">✨</span>
+        <span>Начальный экран</span>
+      </a>
+      <a href="#auth" class="nav-link">
+        <span class="icon">🔑</span>
+        <span>Вход / Регистрация</span>
+      </a>
     </nav>
   </aside>
 
@@ -104,6 +112,11 @@
           <div class="user-avatar-mini" id="header-user-avatar">🛡️</div>
           <span class="user-name-mini" id="header-user-name">Ярослав</span>
         </div>
+
+        <!-- Кнопка Вход / Сменить аккаунт -->
+        <button class="btn btn-secondary btn-sm" onclick="window.location.hash='#auth'" title="Вход / Сменить аккаунт" style="padding: 6px 12px; font-size: 0.82rem; border-radius: var(--radius-full);">
+          🔑 Вход
+        </button>
       </div>
     </header>
 

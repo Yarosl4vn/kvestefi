@@ -14,6 +14,8 @@ import { renderSupport } from './views/support.js';
 import { renderProfile } from './views/profile.js';
 import { renderDeveloper } from './views/developer.js';
 import { renderSettings } from './views/settings.js';
+import { renderOnboarding } from './views/onboarding.js';
+import { renderAuth } from './views/auth.js';
 
 class Application {
   constructor() {
@@ -46,7 +48,13 @@ class Application {
 
     // Маршрутизация по хэшу
     window.addEventListener('hashchange', () => this.handleRouting());
-    this.handleRouting();
+
+    // Первый запуск (как в Android MainActivity: if (!prefs.onboarded) startActivity(Onboarding))
+    if (!store.isOnboarded() && (!window.location.hash || window.location.hash === '#home')) {
+      window.location.hash = '#onboarding';
+    } else {
+      this.handleRouting();
+    }
 
     // Разблокировка Web Audio по первому взаимодействию
     document.addEventListener('click', () => sound.init(), { once: true });
@@ -87,6 +95,14 @@ class Application {
 
     // Роутинг экранов
     switch (route) {
+      case 'onboarding':
+        document.title = 'Квестефи — Начальный экран и настройка';
+        renderOnboarding(container);
+        break;
+      case 'auth':
+        document.title = 'Квестефи — Вход и Авторизация';
+        renderAuth(container);
+        break;
       case 'home':
         document.title = 'Квестефи — Главная';
         renderHome(container);
@@ -162,6 +178,8 @@ class Application {
     const titleEl = document.getElementById('header-page-title');
     if (titleEl) {
       const titles = {
+        onboarding: 'Начальная настройка',
+        auth: 'Вход в систему',
         home: 'Квестефи',
         subjects: 'Школьные дисциплины',
         quiz: 'Интеллектуальный квест',

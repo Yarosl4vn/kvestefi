@@ -129,8 +129,34 @@ export function renderProfile(container) {
           </button>
         </div>
       </div>
+
+      <!-- 4. УПРАВЛЕНИЕ СЕССИЕЙ И НАЧАЛЬНЫМ ЭКРАНОМ -->
+      <div class="card" style="margin-bottom: 24px;">
+        <h3 style="font-size: 1.25rem; font-weight: 900; margin-bottom: 12px; color: var(--text-main);">
+          ⚙️ Управление входом и сессией
+        </h3>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="btn btn-secondary" onclick="window.location.hash='#auth'">
+            🔑 Страница входа и регистрации
+          </button>
+          <button class="btn btn-secondary" onclick="window.location.hash='#onboarding'">
+            ✨ Пройти онбординг заново
+          </button>
+          <button class="btn btn-danger" onclick="window.logoutUser()">
+            🚪 Выйти из аккаунта
+          </button>
+        </div>
+      </div>
     </div>
   `;
+
+  window.logoutUser = () => {
+    if (confirm('Вы уверены, что хотите выйти из аккаунта?')) {
+      sound.click();
+      store.logout();
+      window.location.hash = '#auth';
+    }
+  };
 
   window.switchTestAccount = (login) => {
     sound.click();
